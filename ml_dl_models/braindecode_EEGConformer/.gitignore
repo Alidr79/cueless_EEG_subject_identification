@@ -1,0 +1,4 @@
+# Ignore the checkpoints
+checkpoints_EEGConformer_train-1,2,3_val-4_test-5/
+checkpoints_EEGConformer_train-1,2_val-4_test-5/
+checkpoints_EEGConformer_train-1_val-4_test-5/
