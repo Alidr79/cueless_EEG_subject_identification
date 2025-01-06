@@ -8,15 +8,15 @@ This repository provides tools and scripts for processing EEG data, performing s
 ## 📜 Table of Contents
 - [🛠 Usage](#-usage)
   - [1. Data Structuring & File Integration](#1-data-structuring--file-integration)
-    - [📥 Download the Data](#download-the-data)
-    - [📁 Replace the Directory](#replace-the-directory)
-    - [🔄 Run the Integration Script](#run-the-integration-script)
+    - 📥 Download the Data
+    - 📁 Replace the Directory
+    - 🔄 Run the Integration Script
   - [2. Signal Preprocessing](#2-signal-preprocessing)
   - [3. Machine & Deep Learning Models](#3-machine--deep-learning-models)
-    - [Generating Datasets](#a-generating-datasets)
-    - [SVM and XGB on Statistical and Wavelet Features](#b-svm-and-xgb-on-statistical-and-wavelet-features)
-    - [Moment Models](#c-moment-models)
-    - [End-to-End Architectures](#d-end-to-end-architectures)
+    - Generating Datasets
+    - SVM and XGB on Statistical and Wavelet Features
+    - Moment Models
+    - End-to-End Architectures
 - [📫 Contact](#-contact)
 
 ---
