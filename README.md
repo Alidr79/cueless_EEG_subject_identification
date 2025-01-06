@@ -25,7 +25,7 @@ This repository provides tools and scripts for processing EEG data, performing s
 ### 1. Data Structuring & File Integration
 📥 Download the Data
 
-Download the "Device Output Data" directory from the Hugging Face Dataset of this project.
+Download the "Device Output Data" directory from the [Hugging Face Dataset](https://huggingface.co/datasets/Alidr79/cueless_EEG_subject_identification) of this project.
 
 📁 Replace the Directory
 
@@ -41,7 +41,7 @@ Example:
 ```bash
 python data_structuring_file_integration.py --subject-num 1 --session-num 1
 ```
-⏭️ Alternatively, you can skip this step by downloading the pre-generated `Dataset` directory from the Hugging Face.
+⏭️ Alternatively, you can skip this step by downloading the pre-generated `Dataset` directory from the [Hugging Face](https://huggingface.co/datasets/Alidr79/cueless_EEG_subject_identification).
 
 ### 2. Signal Preprocessing
 Preprocess the EEG signals to prepare them for analysis and modeling.
@@ -55,7 +55,7 @@ python signal_preprocessing.py --subject-num 10 --session-num 1 --gender female
 - Logs: Execution logs are saved in the logs_integrate_structuring directory.
 - Output: Preprocessed signals are saved in Dataset/derivatives/preprocessed_eeg.
 
-⏭️ Alternatively, skip this step by downloading the `Dataset/derivatives/preprocessed_eeg` from the Hugging Face.
+⏭️ Alternatively, skip this step by downloading the `Dataset/derivatives/preprocessed_eeg` from the [Hugging Face](https://huggingface.co/datasets/Alidr79/cueless_EEG_subject_identification).
 
 ### 3. Machine & Deep Learning Models
 - **Generating Datasets**
