@@ -1,5 +1,5 @@
 # 🧠✨ Subject Identification Based On Cueless Imagined Speech
-[![preprint](https://img.shields.io/static/v1?label=arXiv&message=2402.03885&color=B31B1B&logo=arXiv)](https://arxiv.org/abs/2501.09700)
+[![preprint](https://img.shields.io/static/v1?label=arXiv&message=2501.09700&color=B31B1B&logo=arXiv)](https://arxiv.org/abs/2501.09700)
 
 This repository provides tools and scripts for processing EEG data, performing signal preprocessing, and running machine and deep learning models for "**Cueless EEG imagined speech for subject identification: dataset and benchmarks**" [paper](https://arxiv.org/abs/2501.09700).
 
