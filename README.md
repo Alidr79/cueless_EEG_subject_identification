@@ -66,6 +66,7 @@ Navigate to the `ml_dl_models` directory to generate `.npy` datasets from the `.
 cd ml_dl_models
 
 # Generate numpy datasets from .fif files
+# 🚨 Before running the following code change the data_path_template in the code to your desired path
 python read_and_save.py
 
 # Generate train and test sets with different configurations
