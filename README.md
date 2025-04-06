@@ -128,9 +128,16 @@ For any questions or feedback, feel free to reach out:
 - linkedin: https://www.linkedin.com/in/ali-derakhshesh/
 
 
+## Citation
 
-
-
+```bibtex
+@article{derakhshesh2025cueless,
+  title={Cueless EEG imagined speech for subject identification: dataset and benchmarks},
+  author={Derakhshesh, Ali and Dehghanian, Zahra and Ebrahimpour, Reza and Rabiee, Hamid R},
+  journal={arXiv preprint arXiv:2501.09700},
+  year={2025}
+}
+```
 
 
 
