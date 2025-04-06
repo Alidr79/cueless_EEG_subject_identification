@@ -20,6 +20,7 @@ This repository provides tools and scripts for processing EEG data, performing s
     - Moment Models
     - End-to-End Architectures
 - [📫 Contact](#-contact)
+- [📄 How to cite?](#citation)
 
 ---
 
