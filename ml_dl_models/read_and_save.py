@@ -11,7 +11,7 @@ mne.set_log_level('WARNING')
 
 all_subject_ids = range(1, 12)
 session_ids = [1,2,3,4,5]
-data_path_template = "/media/external_2T/alidr/Subject_Identification_Imagined_Speech/Dataset/derivatives/preprocessed_eeg/sub-{:02d}/ses-{:02d}/eeg/sub-{:02d}_ses-{:02d}_eeg.fif"
+data_path_template = "/media/external20/ali_derakhshesh/cueless_EEG_subject_identification/Dataset/derivatives/preprocessed_eeg/sub-{:02d}/ses-{:02d}/eeg/sub-{:02d}_ses-{:02d}_eeg.fif"
 
 # Load and preprocess each subject's se = []
 all_epochs = []
