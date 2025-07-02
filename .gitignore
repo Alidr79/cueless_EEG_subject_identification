@@ -1,0 +1,10 @@
+# Ignore the Dataset directory
+Dataset/
+
+# Ignore the "Device Output Data" directory
+Device Output Data/
+
+
+ml_dl_models/all_dataset.npy
+ml_dl_models/all_eeg.npy
+ml_dl_models/all_metadata.csv
