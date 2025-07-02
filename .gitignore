@@ -8,3 +8,11 @@ Device Output Data/
 ml_dl_models/all_dataset.npy
 ml_dl_models/all_eeg.npy
 ml_dl_models/all_metadata.csv
+
+ml_dl_models/test_dataset.npy
+ml_dl_models/train_dataset.npy
+ml_dl_models/train_dataset_ses-1.npy
+ml_dl_models/train_dataset_ses-1,2.npy
+ml_dl_models/val_dataset.npy
+
+
