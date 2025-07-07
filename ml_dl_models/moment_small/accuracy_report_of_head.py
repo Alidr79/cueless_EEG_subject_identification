@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 
 
-predictions = np.load('51-shot_small_labels.npy')
+predictions = np.load('model_small_seed_97_labels.npy')
 
 
 all_metadata = pd.read_csv('../all_metadata.csv')
@@ -33,6 +33,5 @@ print("test precision = ", test_precision)
 print("test recall = ", test_recall)
 
 
-with open("MOMENT_small_full_finetuned_head_accuracy_report.md", "a") as log_file:  # Open in append mode
-    log_file.write("51-shot_small_labels.npy")
+with open("MOMENT_small_seed_97_full_finetuned_head_accuracy_report.md", "a") as log_file:  # Open in append mode
     log_file.write(f"\n## Head classifier results : Test Accuracy: {test_acc:.4f}, Test Precision: {test_precision:.4f}, Test Recall: {test_recall:.4f}\n")

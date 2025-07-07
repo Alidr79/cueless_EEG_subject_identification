@@ -4,7 +4,13 @@ import os
 import torch 
 import numpy as np 
 
-def control_randomness(seed: int = 42):
+
+# SEED = 42
+# SEED = 1
+SEED = 97
+
+
+def control_randomness(seed: int):
     """Function to control randomness in the code."""
     random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
@@ -14,7 +20,7 @@ def control_randomness(seed: int = 42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-control_randomness(42)
+control_randomness(SEED)
 
 
 # For dataloader
@@ -24,7 +30,7 @@ def seed_worker(worker_id):
     random.seed(worker_seed)
 
 g = torch.Generator()
-g.manual_seed(42)
+g.manual_seed(SEED)
 
 
 model = MOMENTPipeline.from_pretrained(
@@ -186,7 +192,7 @@ def save_model(model, optimizer, scheduler, epoch, save_path="checkpoints_small_
         'epoch': epoch
     }
     # Save the checkpoint
-    save_file_path = os.path.join(save_path, f'model_epoch_{extra_file_str}{epoch}.pth')
+    save_file_path = os.path.join(save_path, f'model_seed_{SEED}_epoch_{extra_file_str}{epoch}.pth')
     torch.save(checkpoint, save_file_path)
     print(f"Model saved to {save_file_path}")
 
@@ -212,7 +218,7 @@ def log_write(file, log_input):
 
 # start_epoch = 100
 
-log_to_file = 'finetune_100_epochs_small_val-4_test-5_log.md'
+log_to_file = f'finetune_100_epochs_small_seed_{SEED}_val-4_test-5_log.md'
 epoch = 100
 
 log_write(log_to_file, f"train on ses-1-2-3 val on ses-4 and test on ses-5\n")

@@ -9,8 +9,10 @@ import os
 import torch 
 import numpy as np 
 
+# SEED = 1
+SEED = 97
 
-def control_randomness(seed: int = 42):
+def control_randomness(seed: int):
     """Function to control randomness in the code."""
     random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
@@ -19,7 +21,7 @@ def control_randomness(seed: int = 42):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-control_randomness(42)
+control_randomness(SEED)
 
 model = MOMENTPipeline.from_pretrained(
                                         "AutonLab/MOMENT-1-small", 
@@ -113,9 +115,9 @@ all_dataset = PaddedNpyDataset('../all_dataset.npy')
 all_loader = DataLoader(all_dataset, batch_size = 1, shuffle = False)
 
 device = 'cuda'
-# checkpoint = torch.load('checkpoints_small_val-4_test-5/model_epoch_best_51.pth')
-# model.load_state_dict(checkpoint['model_state_dict'])
+checkpoint = torch.load('checkpoints_small_val-4_test-5/model_seed_97_epoch_best_34.pth')
+model.load_state_dict(checkpoint['model_state_dict'])
 all_embeddings, all_labels = get_embeddings(model, device, all_loader)
 
-np.save('zero-shot_small_embeddings.npy', all_embeddings)
-# np.save('51-shot_small_labels.npy', all_labels)
+# np.save('zero-shot_small_embeddings.npy', all_embeddings)
+np.save('model_small_seed_97_labels.npy', all_labels)
