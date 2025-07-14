@@ -13,18 +13,20 @@ from torch.nn import Module
 from torch.optim.lr_scheduler import LRScheduler
 
 
+# SEED = 42
+# SEED = 1
+SEED = 97
+
+
 TRAIN_DATASET_PATH = '../train_dataset.npy'
-CHECKPOINT_SAVE_PATH = "checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
-OPTUNA_STUDY_NAME = "study_EEGNetv1_train-1,2,3_val-4_test-5"
-OPTUNA_SAVE_LOG = "sqlite:///study_EEGNetv1_train-1,2,3_val-4_test-5.sqlite3"
-OPTUNA_N_TRIALS = 30
+CHECKPOINT_SAVE_PATH = f"seed_{SEED}_checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
 
 
 # For more consistency across GPUs
 torch.backends.cuda.matmul.allow_tf32 = False
 torch.backends.cudnn.allow_tf32 = False
 
-def control_randomness(seed: int = 42):
+def control_randomness(seed: int):
     """Function to control randomness in the code."""
     random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
@@ -35,10 +37,10 @@ def control_randomness(seed: int = 42):
     torch.backends.cudnn.benchmark = False
 
 # Control randomness
-control_randomness(42)
+control_randomness(SEED)
 cuda = torch.cuda.is_available()
 device = "cuda" if cuda else "cpu"
-seed = 42
+seed = SEED
 set_random_seeds(seed=seed, cuda=cuda)
 
 # For dataloader
@@ -48,7 +50,7 @@ def seed_worker(worker_id):
     random.seed(worker_seed)
 
 g = torch.Generator()
-g.manual_seed(42)
+g.manual_seed(SEED)
 
 n_classes = 11
 classes = list(range(n_classes))
@@ -195,142 +197,56 @@ def log_write(file, log_input):
 
 
 ######################################################
-# Objective function for Optuna
+# Train model with fixed hyper-parameters
 ######################################################
-def objective(trial: Trial):
-    """Optuna objective function to search for the best hyperparameters."""
-    # Suggest hyperparameters
-    lr = trial.suggest_loguniform("lr", 1e-5, 1e-2)
-    weight_decay = trial.suggest_loguniform("weight_decay", 1e-8, 1e-2)
-    train_batch_size = trial.suggest_categorical("train_batch_size", [16, 32, 64, 128])
-    val_batch_size = trial.suggest_categorical("val_batch_size", [16, 32])
+if __name__ == "__main__":
+    # Use fixed hyperparameters which are found by the optuna
+    lr = 0.002582271768800247
+    weight_decay = 6.246793578511366e-08
+    train_batch_size = 16
+    val_batch_size = 16
 
-    # Create model with the fixed parameters from your code, or you can also search over them
+    # Build model
     model = EEGNetv1(
-    n_chans = n_channels,
-    n_outputs = n_classes,
-    n_times = input_window_samples,
-    sfreq = 250,
+        n_chans=n_channels,
+        n_outputs=n_classes,
+        n_times=input_window_samples,
+        sfreq=250,
     ).to(device)
 
-    # Create Dataloaders
+    # Dataloaders
     train_loader, val_loader, test_loader = get_dataloaders(train_batch_size, val_batch_size)
 
-    # Define optimizer, scheduler, loss_fn
+    # Optimizer, scheduler, loss
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     n_epochs = 30
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=n_epochs - 1)
     loss_fn = torch.nn.CrossEntropyLoss()
 
-    # We can keep some best val accuracy tracking (or best val loss)
+    # Training with early stopping
     best_val_accuracy = 0.0
     patience = 6
     counter = 0
 
     for epoch in range(1, n_epochs + 1):
         train_loss, train_accuracy = train_one_epoch(
-            train_loader, model, loss_fn, optimizer, scheduler, epoch, device, print_batch_stats=False
+            train_loader, model, loss_fn, optimizer, scheduler, epoch, device
         )
-        val_loss, val_accuracy = test_model(val_loader, model, loss_fn, print_batch_stats=False, phase="val")
-        # If you want to reduce time during hyperparam search, you can skip testing on test_loader for now
+        val_loss, val_accuracy = test_model(val_loader, model, loss_fn, phase="val")
+        test_loss, test_accuracy = test_model(test_loader, model, loss_fn, phase="test")
 
-        # If val accuracy improved, reset patience counter
         if val_accuracy > best_val_accuracy:
             best_val_accuracy = val_accuracy
+            save_model(model, optimizer, scheduler, epoch, extra_file_str="best_")
+            print(f"New best val accuracy: {val_accuracy:.4f} at epoch {epoch}")
+            print("Test Accuracy:", test_accuracy)
             counter = 0
         else:
             counter += 1
 
-        # Early stopping
         if counter > patience:
+            print(f"Early stopping at epoch {epoch}. No val accuracy improvement for {patience} epochs.")
+            save_model(model, optimizer, scheduler, epoch, extra_file_str="earlyStop_")
             break
 
-        # Tell Optuna that we can prune here if needed
-        trial.report(val_accuracy, epoch)
-        # If the trial should be pruned, you can raise an exception
-        if trial.should_prune():
-            raise optuna.TrialPruned()
-
-    # We want to maximize accuracy
-    return best_val_accuracy
-
-
-######################################################
-# Running Optuna study
-######################################################
-if __name__ == "__main__":
-    # Optional: specify a storage, sampler, pruner, etc.
-    study = optuna.create_study(
-        direction="maximize",  # since we're returning accuracy
-        storage=OPTUNA_SAVE_LOG,
-        study_name=OPTUNA_STUDY_NAME,
-        sampler=optuna.samplers.TPESampler(seed=42),
-        pruner=optuna.pruners.MedianPruner(n_warmup_steps=5)
-    )
-
-    # Try a certain number of trials
-    n_trials = OPTUNA_N_TRIALS
-    study.optimize(objective, n_trials=n_trials, timeout=None)
-
-    print("Number of finished trials: ", len(study.trials))
-    print("Best trial:")
-    best_trial = study.best_trial
-    print(f"  Value (best accuracy): {best_trial.value}")
-    print(f"  Params: ")
-    for key, value in best_trial.params.items():
-        print(f"    {key}: {value}")
-
-    # If you want to re-train a final model with the best hyperparams:
-    best_params = best_trial.params
-    print("\nRe-training final model with best parameters:")
-    pprint(best_params)
-
-    # Example: final training with best hyperparams
-    lr = best_params["lr"]
-    weight_decay = best_params["weight_decay"]
-    train_batch_size = best_params["train_batch_size"]
-    val_batch_size = best_params["val_batch_size"]
-
-    # Build final model
-    final_model = EEGNetv1(
-        n_chans = n_channels,
-        n_outputs = n_classes,
-        n_times = input_window_samples,
-        sfreq = 250,
-        ).to(device)
-
-    # DataLoaders
-    train_loader, val_loader, test_loader = get_dataloaders(train_batch_size, val_batch_size)
-
-    # Define optimizer, scheduler, loss
-    optimizer = torch.optim.AdamW(final_model.parameters(), lr=lr, weight_decay=weight_decay)
-    n_epochs = 30  # you may use more epochs if you want
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=n_epochs - 1)
-    loss_fn = torch.nn.CrossEntropyLoss()
-
-    best_val_accuracy = 0.0
-    patience = 6
-    counter = 0
-
-    for epoch in range(1, n_epochs + 1):
-        train_loss, train_accuracy = train_one_epoch(
-            train_loader, final_model, loss_fn, optimizer, scheduler, epoch, device
-        )
-        val_loss, val_accuracy = test_model(val_loader, final_model, loss_fn, phase="val")
-        test_loss, test_accuracy = test_model(test_loader, final_model, loss_fn, phase="test")
-
-        if val_accuracy > best_val_accuracy:
-            best_val_accuracy = val_accuracy
-            save_model(final_model, optimizer, scheduler, epoch, extra_file_str="best_")
-            print("Test ACC : ", test_accuracy , "At Epoch : ", epoch)
-            counter = 0
-        else:
-            counter += 1
-
-        # Early stopping
-        if counter > patience:
-            print(f"Early stopping triggered at epoch {epoch}. No improvement in validation accuracy for {patience} consecutive epochs.")
-            save_model(final_model, optimizer, scheduler, epoch, extra_file_str="earlyStop_")
-            break
-
-    print("Optuna hyperparameter search + final training complete.")
+    print("Training complete with fixed hyperparameters.")

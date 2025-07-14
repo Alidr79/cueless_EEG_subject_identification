@@ -19,16 +19,21 @@ def log_write(file, log_input):
     with open(file, 'a') as log_file:
         log_file.write(log_input)
 
+# SEED = 42
+# SEED = 1
+SEED = 97
 
-CHECKPOINT_LOAD_PATH = "checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
-checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_8.pth"
+CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
+checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_13.pth"
 
-log_to_file = 'test_results_EEGNetv1_train-1,2,3_val-4_test-5.md'
-log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\n")
-
-
+log_to_file = f'seed_{SEED}_test_results_EEGNetv1_train-1,2,3_val-4_test-5.md'
+log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\nseed_{SEED}\n")
 
 
+
+# For more consistency across GPUs
+torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cudnn.allow_tf32 = False
 
 def control_randomness(seed: int = 42):
     """Function to control randomness in the code."""
@@ -41,10 +46,10 @@ def control_randomness(seed: int = 42):
     torch.backends.cudnn.benchmark = False
 
 # Control randomness
-control_randomness(42)
+control_randomness(SEED)
 cuda = torch.cuda.is_available()
 device = "cuda" if cuda else "cpu"
-seed = 42
+seed = SEED
 set_random_seeds(seed=seed, cuda=cuda)
 
 # For dataloader
@@ -54,7 +59,7 @@ def seed_worker(worker_id):
     random.seed(worker_seed)
 
 g = torch.Generator()
-g.manual_seed(42)
+g.manual_seed(SEED)
 
 n_classes = 11
 classes = list(range(n_classes))

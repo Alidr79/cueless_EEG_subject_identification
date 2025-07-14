@@ -19,6 +19,11 @@ OPTUNA_STUDY_NAME = "study_EEGConformer_train-1,2,3_val-4_test-5"
 OPTUNA_SAVE_LOG = "sqlite:///study_EEGConformer_train-1,2,3_val-4_test-5.sqlite3"
 OPTUNA_N_TRIALS = 30
 
+
+# For more consistency across GPUs
+torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cudnn.allow_tf32 = False
+
 def control_randomness(seed: int = 42):
     """Function to control randomness in the code."""
     random.seed(seed)
