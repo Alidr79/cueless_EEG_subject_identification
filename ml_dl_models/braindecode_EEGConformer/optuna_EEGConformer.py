@@ -13,10 +13,10 @@ from torch.nn import Module
 from torch.optim.lr_scheduler import LRScheduler
 
 
-TRAIN_DATASET_PATH = '../train_dataset.npy'
-CHECKPOINT_SAVE_PATH = "checkpoints_EEGConformer_train-1,2,3_val-4_test-5"
-OPTUNA_STUDY_NAME = "study_EEGConformer_train-1,2,3_val-4_test-5"
-OPTUNA_SAVE_LOG = "sqlite:///study_EEGConformer_train-1,2,3_val-4_test-5.sqlite3"
+TRAIN_DATASET_PATH = '../dataset_ses-3.npy'
+CHECKPOINT_SAVE_PATH = "checkpoints_EEGConformer_train-3_val-4_test-5"
+OPTUNA_STUDY_NAME = "study_EEGConformer_train-3_val-4_test-5"
+OPTUNA_SAVE_LOG = "sqlite:///study_EEGConformer_train-3_val-4_test-5.sqlite3"
 OPTUNA_N_TRIALS = 30
 
 

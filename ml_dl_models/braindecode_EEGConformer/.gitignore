@@ -2,7 +2,8 @@
 checkpoints_EEGConformer_train-1,2,3_val-4_test-5/
 checkpoints_EEGConformer_train-1,2_val-4_test-5/
 checkpoints_EEGConformer_train-1_val-4_test-5/
-
+checkpoints_EEGConformer_train-2_val-4_test-5/
+checkpoints_EEGConformer_train-3_val-4_test-5/
 
 seed_1_checkpoints_EEGConformer_train-1,2,3_val-4_test-5/
 seed_42_checkpoints_EEGConformer_train-1,2,3_val-4_test-5/
