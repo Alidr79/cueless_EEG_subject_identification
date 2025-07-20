@@ -19,16 +19,19 @@ def log_write(file, log_input):
     with open(file, 'a') as log_file:
         log_file.write(log_input)
 
-# SEED = 42
+SEED = 42
 # SEED = 1
-SEED = 97
+# SEED = 97
 
 
-CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_ShallowFBCSPNet_train-1,2,3_val-4_test-5"
-checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_7.pth"
+# CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_ShallowFBCSPNet_train-1,2,3_val-4_test-5"
+CHECKPOINT_LOAD_PATH = f"checkpoints_ShallowFBCSPNet_train-3_val-4_test-5"
+checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_2.pth"
 
-log_to_file = f'seed_{SEED}_test_results_ShallowFBCSPNet_train-1,2,3_val-4_test-5.md'
-log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\nseed_{SEED}\n")
+# log_to_file = f'seed_{SEED}_test_results_ShallowFBCSPNet_train-1,2,3_val-4_test-5.md'
+# log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\nseed_{SEED}\n")
+log_to_file = f'test_results_ShallowFBCSPNet_train-3_val-4_test-5.md'
+log_write(log_to_file, f"train on ses-3 val on ses-4 and test on ses-5\n")
 
 
 # For more consistency across GPUs
