@@ -27,7 +27,7 @@ CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_EEGConformer_train-1,2,3_val-4_
 # CHECKPOINT_LOAD_PATH = f"checkpoints_EEGConformer_train-3_val-4_test-5"
 checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_27.pth"
 
-log_to_file = f'per_class_test_results_EEGConformer_train-1,2,3_val-4_test-5.md'
+log_to_file = f'per_class_and_per_word_test_results_EEGConformer_train-1,2,3_val-4_test-5.md'
 log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5")
 # log_to_file = f'seed_{SEED}_test_results_EEGConformer_train-1,2,3_val-4_test-5.md'
 # log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\nseed_{SEED}")
@@ -89,6 +89,36 @@ model.load_state_dict(checkpoint['model_state_dict'])
 loss_fn = torch.nn.CrossEntropyLoss()
 
 
+def calculate_per_word_accuracy(y_true, y_pred, word_labels, word_names=None):
+    
+    per_word_accuracy = {}
+        
+    # Get unique words
+    unique_words = np.unique(word_labels)
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    
+    for word_idx in unique_words:
+        # Find all samples for this word
+        word_mask = word_labels == word_idx
+        
+        if np.sum(word_mask) == 0:
+            continue
+
+        # Get true and predicted labels for this word only
+        word_true = y_true[word_mask]
+        word_pred = y_pred[word_mask]
+        
+        # Calculate accuracy for this word
+        correct_predictions = np.sum(word_true == word_pred)
+        total_predictions = len(word_true)
+        word_accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0.0
+        
+        word_name = word_names[word_idx] if word_idx < len(word_names) else f'Word_{word_idx}'
+        per_word_accuracy[word_name] = word_accuracy
+    
+    return per_word_accuracy
+
 def calculate_per_class_accuracy(y_true, y_pred, n_classes):
     cm = confusion_matrix(y_true, y_pred, labels=list(range(n_classes)))
     
@@ -113,7 +143,7 @@ def calculate_per_class_accuracy(y_true, y_pred, n_classes):
 
 @torch.no_grad()
 def test_model(
-    dataloader: DataLoader, model: Module, loss_fn, print_batch_stats=True, phase = "test"
+    dataloader: DataLoader, model: Module, loss_fn, word_labels=None, word_names=None, print_batch_stats=True, phase = "test"
 ):
     size = len(dataloader.dataset)
     n_batches = len(dataloader)
@@ -169,8 +199,18 @@ def test_model(
     print("Confusion Matrix:")
     print(confusion_mat)
     print()
+    
+  # Calculate and print per-word accuracies if word labels are provided
+    per_word_acc = None
+    if word_labels is not None:
+        per_word_acc = calculate_per_word_accuracy(all_labels, all_preds, word_labels, word_names)
+        
+        print("Per-Word Accuracies:")
+        for word_name, acc in per_word_acc.items():
+            print(f"{word_name}: {100 * acc:.2f}%")
+        print()
 
-    return average_loss, accuracy, macro_precision, macro_recall, per_class_acc, confusion_mat
+    return average_loss, accuracy, macro_precision, macro_recall, per_class_acc, confusion_mat, per_word_acc 
 
 
 
@@ -206,7 +246,15 @@ test_loader  = DataLoader(test_dataset,  batch_size=16,
                               shuffle=False, num_workers=2,
                               worker_init_fn=seed_worker, generator=g)
 
-test_loss, test_accuracy, test_macro_precision, test_macro_recall, per_class_accuracies, confusion_matrix_result = test_model(test_loader, model, loss_fn)
+metadata = pd.read_csv("../all_metadata.csv")
+test_indices = metadata[metadata['session_id'] == 5].index.values
+word_labels = metadata.loc[test_indices, "words"].values - 1  ## start from 0
+
+word_names = ['backward', 'forward', 'left', 'right', 'stop']
+
+
+
+test_loss, test_accuracy, test_macro_precision, test_macro_recall, per_class_accuracies, confusion_matrix_result, per_word_accuracies = test_model(test_loader, model, loss_fn, word_labels=word_labels, word_names=word_names)
 
 
 log_write(log_to_file, f"Test Accuracy: {test_accuracy:.4f}, Test Precision: {test_macro_precision:.4f}, Test Recall: {test_macro_recall:.4f}\n")
@@ -216,5 +264,11 @@ for class_name, acc in per_class_accuracies.items():
     log_write(log_to_file, f"{class_name}: {acc:.4f}\n")
 
 log_write(log_to_file, f"Confusion Matrix:\n{confusion_matrix_result}\n")
+
+# Log per-word accuracies if available
+if per_word_accuracies is not None:
+    log_write(log_to_file, "\n\nPer-Word Accuracies:\n")
+    for word_name, acc in per_word_accuracies.items():
+        log_write(log_to_file, f"{word_name}: {acc:.4f}\n")
 
 print(test_accuracy, test_macro_precision, test_macro_recall)

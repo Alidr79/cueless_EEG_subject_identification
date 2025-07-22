@@ -23,3 +23,11 @@ Confusion Matrix:
  [ 0  0  0  0  0  0  0  0 45  1  1]
  [ 0  0  0  0  0  0  0  1  0 47  0]
  [ 0  0  0  0  0  0  0  0  0 15 34]]
+
+
+Per-Word Accuracies:
+backward: 0.8447
+forward: 0.8636
+left: 0.8544
+right: 0.8017
+stop: 0.8800
