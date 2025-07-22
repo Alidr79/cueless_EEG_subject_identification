@@ -12,7 +12,7 @@ from pprint import pprint
 from torch.utils.data import Dataset, DataLoader
 from torch.nn import Module
 from torch.optim.lr_scheduler import LRScheduler
-from sklearn.metrics import precision_score, recall_score, accuracy_score  # Import metrics
+from sklearn.metrics import precision_score, recall_score, accuracy_score, confusion_matrix  # Import metrics
 
 
 def log_write(file, log_input):
@@ -23,14 +23,16 @@ SEED = 42
 # SEED = 1
 # SEED = 97
 
-# CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
-CHECKPOINT_LOAD_PATH = f"checkpoints_EEGNetv1_train-3_val-4_test-5"
-checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_14.pth"
+CHECKPOINT_LOAD_PATH = f"seed_{SEED}_checkpoints_EEGNetv1_train-1,2,3_val-4_test-5"
+# CHECKPOINT_LOAD_PATH = f"checkpoints_EEGNetv1_train-3_val-4_test-5"
+checkpoint_path = CHECKPOINT_LOAD_PATH + "/model_epoch_best_7.pth"
 
+log_to_file = f'per_class_test_results_EEGNetv1_train-1,2,3_val-4_test-5.md'
+log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5")
 # log_to_file = f'seed_{SEED}_test_results_EEGNetv1_train-1,2,3_val-4_test-5.md'
 # log_write(log_to_file, f"train on ses-1,2,3 val on ses-4 and test on ses-5\nseed_{SEED}\n")
-log_to_file = f'test_results_EEGNetv1_train-3_val-4_test-5.md'
-log_write(log_to_file, f"train on ses-3 val on ses-4 and test on ses-5")
+# log_to_file = f'test_results_EEGNetv1_train-3_val-4_test-5.md'
+# log_write(log_to_file, f"train on ses-3 val on ses-4 and test on ses-5")
 
 
 
@@ -85,6 +87,29 @@ model.load_state_dict(checkpoint['model_state_dict'])
 # Define loss function (assuming CrossEntropyLoss)
 loss_fn = torch.nn.CrossEntropyLoss()
 
+
+def calculate_per_class_accuracy(y_true, y_pred, n_classes):
+    cm = confusion_matrix(y_true, y_pred, labels=list(range(n_classes)))
+    
+    per_class_accuracy = {}
+    class_names = [f'sub-{i+1:02d}' for i in range(n_classes)] 
+        
+    for i in range(n_classes):
+        # True Positives for class i
+        tp = cm[i, i]
+        # Total samples for class i
+        total_class_samples = cm[i, :].sum()
+        
+        if total_class_samples > 0:
+            class_accuracy = tp / total_class_samples
+        else:
+            class_accuracy = 0.0  # No samples for this class
+            
+        per_class_accuracy[class_names[i]] = class_accuracy
+    
+    return per_class_accuracy, cm
+
+
 @torch.no_grad()
 def test_model(
     dataloader: DataLoader, model: Module, loss_fn, print_batch_stats=True, phase = "test"
@@ -126,12 +151,24 @@ def test_model(
     macro_precision = precision_score(all_labels, all_preds, average='macro', zero_division=0)
     macro_recall = recall_score(all_labels, all_preds, average='macro', zero_division=0)
 
+    per_class_acc, confusion_mat = calculate_per_class_accuracy(all_labels, all_preds, n_classes)
+
     print(f"{phase} Accuracy: {100 * accuracy:.2f}%")
     print(f"{phase} Macro Precision: {100 * macro_precision:.2f}%")
     print(f"{phase} Macro Recall: {100 * macro_recall:.2f}%")
     print(f"{phase} Loss: {average_loss:.6f}\n")
+    
+    print("Per-Class Accuracies:")
+    for class_name, acc in per_class_acc.items():
+        print(f"{class_name}: {100 * acc:.2f}%")
+    print()
+    
+    print("Confusion Matrix:")
+    print(confusion_mat)
+    print()
 
-    return average_loss, accuracy, macro_precision, macro_recall
+    return average_loss, accuracy, macro_precision, macro_recall, per_class_acc, confusion_mat
+
 
 
 
@@ -167,8 +204,15 @@ test_loader  = DataLoader(test_dataset,  batch_size=16,
                               shuffle=False, num_workers=2,
                               worker_init_fn=seed_worker, generator=g)
 
-test_loss, test_accuracy, test_macro_precision, test_macro_recall = test_model(test_loader, model, loss_fn)
+test_loss, test_accuracy, test_macro_precision, test_macro_recall, per_class_accuracies, confusion_matrix_result = test_model(test_loader, model, loss_fn)
 
 
 log_write(log_to_file, f"Test Accuracy: {test_accuracy:.4f}, Test Precision: {test_macro_precision:.4f}, Test Recall: {test_macro_recall:.4f}\n")
+
+log_write(log_to_file, "Per-Class Accuracies:\n")
+for class_name, acc in per_class_accuracies.items():
+    log_write(log_to_file, f"{class_name}: {acc:.4f}\n")
+
+log_write(log_to_file, f"Confusion Matrix:\n{confusion_matrix_result}\n")
+
 print(test_accuracy, test_macro_precision, test_macro_recall)
