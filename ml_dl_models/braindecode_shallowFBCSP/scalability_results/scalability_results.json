@@ -1,0 +1,200 @@
+[
+  {
+    "n_subjects": 2,
+    "n_train_samples": 556,
+    "n_val_samples": 98,
+    "n_test_samples": 96,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.96875,
+    "best_test_precision": 0.9689535388623534,
+    "best_test_recall": 0.96875,
+    "best_epoch": 5,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0001329291894316216,
+      "weight_decay": 0.005061576888752304,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 4.634752388795217,
+    "timestamp": "2025-07-27T11:36:25.011305"
+  },
+  {
+    "n_subjects": 3,
+    "n_train_samples": 845,
+    "n_val_samples": 147,
+    "n_test_samples": 145,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.9862068965517241,
+    "best_test_precision": 0.9866666666666667,
+    "best_test_recall": 0.9862528344671201,
+    "best_epoch": 8,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0001329291894316216,
+      "weight_decay": 0.005061576888752304,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 6.1355539679527284,
+    "timestamp": "2025-07-27T11:42:33.151675"
+  },
+  {
+    "n_subjects": 4,
+    "n_train_samples": 1128,
+    "n_val_samples": 197,
+    "n_test_samples": 193,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.9844559585492227,
+    "best_test_precision": 0.9844812925170068,
+    "best_test_recall": 0.9844812925170068,
+    "best_epoch": 6,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0001329291894316216,
+      "weight_decay": 0.005061576888752304,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 8.865733762582144,
+    "timestamp": "2025-07-27T11:51:25.102946"
+  },
+  {
+    "n_subjects": 5,
+    "n_train_samples": 1421,
+    "n_val_samples": 246,
+    "n_test_samples": 241,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.991701244813278,
+    "best_test_precision": 0.9918367346938777,
+    "best_test_recall": 0.9916666666666666,
+    "best_epoch": 6,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0001329291894316216,
+      "weight_decay": 0.005061576888752304,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 10.57141532500585,
+    "timestamp": "2025-07-27T12:01:59.395244"
+  },
+  {
+    "n_subjects": 6,
+    "n_train_samples": 1705,
+    "n_val_samples": 293,
+    "n_test_samples": 289,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.9792387543252595,
+    "best_test_precision": 0.9798611111111111,
+    "best_test_recall": 0.9793083900226757,
+    "best_epoch": 4,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0006358358856676254,
+      "weight_decay": 0.00017718847354806813,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 15.867975823084514,
+    "timestamp": "2025-07-27T12:17:51.481398"
+  },
+  {
+    "n_subjects": 7,
+    "n_train_samples": 1996,
+    "n_val_samples": 343,
+    "n_test_samples": 339,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.976401179941003,
+    "best_test_precision": 0.9771036424857529,
+    "best_test_recall": 0.9764893100097181,
+    "best_epoch": 13,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0001329291894316216,
+      "weight_decay": 0.005061576888752304,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 22.626481080055235,
+    "timestamp": "2025-07-27T12:40:29.078117"
+  },
+  {
+    "n_subjects": 8,
+    "n_train_samples": 2288,
+    "n_val_samples": 391,
+    "n_test_samples": 388,
+    "best_val_accuracy": 0.9974424552429667,
+    "best_val_precision": 0.9973958333333333,
+    "best_val_recall": 0.9974489795918368,
+    "best_test_accuracy": 0.9819587628865979,
+    "best_test_precision": 0.9822826086956522,
+    "best_test_recall": 0.9819281462585034,
+    "best_epoch": 8,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0009827696709910616,
+      "weight_decay": 0.008946810000979404,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 29.508740933736167,
+    "timestamp": "2025-07-27T13:09:59.610407"
+  },
+  {
+    "n_subjects": 9,
+    "n_train_samples": 2580,
+    "n_val_samples": 441,
+    "n_test_samples": 435,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.9816091954022989,
+    "best_test_precision": 0.9824280481423339,
+    "best_test_recall": 0.9814676508901433,
+    "best_epoch": 17,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.007665415548404399,
+      "weight_decay": 1.7074626001153737e-08,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 37.99126418828964,
+    "timestamp": "2025-07-27T13:47:59.094372"
+  },
+  {
+    "n_subjects": 10,
+    "n_train_samples": 2871,
+    "n_val_samples": 491,
+    "n_test_samples": 483,
+    "best_val_accuracy": 0.9959266802443992,
+    "best_val_precision": 0.9959558823529411,
+    "best_val_recall": 0.9959591836734694,
+    "best_test_accuracy": 0.9937888198757764,
+    "best_test_precision": 0.9938758503401359,
+    "best_test_recall": 0.9937925170068025,
+    "best_epoch": 12,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.004849010455090229,
+      "weight_decay": 1.0863833419456848e-08,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 30.06724065542221,
+    "timestamp": "2025-07-27T14:18:03.136760"
+  }
+]
