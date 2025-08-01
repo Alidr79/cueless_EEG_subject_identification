@@ -1,0 +1,4 @@
+# ignore checkpoints
+train_*
+test_*
+val_*

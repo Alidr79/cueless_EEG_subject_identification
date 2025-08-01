@@ -1,0 +1,200 @@
+[
+  {
+    "n_subjects": 2,
+    "n_train_samples": 556,
+    "n_val_samples": 98,
+    "n_test_samples": 96,
+    "best_val_accuracy": 0.9897959183673469,
+    "best_val_precision": 0.9897959183673469,
+    "best_val_recall": 0.99,
+    "best_test_accuracy": 0.9895833333333334,
+    "best_test_precision": 0.9897959183673469,
+    "best_test_recall": 0.9895833333333333,
+    "best_epoch": 14,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0067980740179675175,
+      "weight_decay": 1.0863833419456848e-08,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 8.46841830809911,
+    "timestamp": "2025-07-27T17:24:17.051331"
+  },
+  {
+    "n_subjects": 3,
+    "n_train_samples": 845,
+    "n_val_samples": 147,
+    "n_test_samples": 145,
+    "best_val_accuracy": 1.0,
+    "best_val_precision": 1.0,
+    "best_val_recall": 1.0,
+    "best_test_accuracy": 0.9862068965517241,
+    "best_test_precision": 0.9866666666666667,
+    "best_test_recall": 0.9861111111111112,
+    "best_epoch": 12,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.009290070338641555,
+      "weight_decay": 8.114333145126922e-07,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 14.256583897272746,
+    "timestamp": "2025-07-27T17:38:32.456666"
+  },
+  {
+    "n_subjects": 4,
+    "n_train_samples": 1128,
+    "n_val_samples": 197,
+    "n_test_samples": 193,
+    "best_val_accuracy": 0.9949238578680203,
+    "best_val_precision": 0.995,
+    "best_val_recall": 0.995,
+    "best_test_accuracy": 0.9792746113989638,
+    "best_test_precision": 0.9797916666666666,
+    "best_test_recall": 0.9793792517006803,
+    "best_epoch": 10,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.009929277114318673,
+      "weight_decay": 7.568676943354655e-08,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 21.60095451672872,
+    "timestamp": "2025-07-27T18:00:08.524754"
+  },
+  {
+    "n_subjects": 5,
+    "n_train_samples": 1421,
+    "n_val_samples": 246,
+    "n_test_samples": 241,
+    "best_val_accuracy": 0.943089430894309,
+    "best_val_precision": 0.9487275185936443,
+    "best_val_recall": 0.9428571428571428,
+    "best_test_accuracy": 0.8755186721991701,
+    "best_test_precision": 0.9004633426275218,
+    "best_test_recall": 0.8754251700680271,
+    "best_epoch": 13,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0067980740179675175,
+      "weight_decay": 1.0863833419456848e-08,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 27.714977538585664,
+    "timestamp": "2025-07-27T18:27:51.438461"
+  },
+  {
+    "n_subjects": 6,
+    "n_train_samples": 1705,
+    "n_val_samples": 293,
+    "n_test_samples": 289,
+    "best_val_accuracy": 0.9453924914675768,
+    "best_val_precision": 0.9542333392181724,
+    "best_val_recall": 0.9451502267573696,
+    "best_test_accuracy": 0.9100346020761245,
+    "best_test_precision": 0.9187747241664294,
+    "best_test_recall": 0.910218253968254,
+    "best_epoch": 18,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.004692838764670127,
+      "weight_decay": 1.0863833419456848e-08,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 29.50066841840744,
+    "timestamp": "2025-07-27T18:57:21.489392"
+  },
+  {
+    "n_subjects": 7,
+    "n_train_samples": 1996,
+    "n_val_samples": 343,
+    "n_test_samples": 339,
+    "best_val_accuracy": 0.9591836734693877,
+    "best_val_precision": 0.9620941245893112,
+    "best_val_recall": 0.9591205053449953,
+    "best_test_accuracy": 0.8849557522123894,
+    "best_test_precision": 0.9040473156932783,
+    "best_test_recall": 0.885298833819242,
+    "best_epoch": 16,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0018915132722765549,
+      "weight_decay": 1.1217226041252264e-06,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 30.301220746835074,
+    "timestamp": "2025-07-27T19:27:39.571132"
+  },
+  {
+    "n_subjects": 8,
+    "n_train_samples": 2288,
+    "n_val_samples": 391,
+    "n_test_samples": 388,
+    "best_val_accuracy": 0.9258312020460358,
+    "best_val_precision": 0.9375764172933985,
+    "best_val_recall": 0.9257393888406427,
+    "best_test_accuracy": 0.8762886597938144,
+    "best_test_precision": 0.9002838374612225,
+    "best_test_recall": 0.8752636054421769,
+    "best_epoch": 22,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0034083161692891593,
+      "weight_decay": 1.4197181768100017e-06,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 37.31505984067917,
+    "timestamp": "2025-07-27T20:04:58.486740"
+  },
+  {
+    "n_subjects": 9,
+    "n_train_samples": 2580,
+    "n_val_samples": 441,
+    "n_test_samples": 435,
+    "best_val_accuracy": 0.909297052154195,
+    "best_val_precision": 0.9169509350569195,
+    "best_val_recall": 0.9090890706164263,
+    "best_test_accuracy": 0.7839080459770115,
+    "best_test_precision": 0.8384077823392402,
+    "best_test_recall": 0.7841752705810456,
+    "best_epoch": 8,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.0016688499868862529,
+      "weight_decay": 2.0161947125070735e-06,
+      "train_batch_size": 16,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 39.36755810578664,
+    "timestamp": "2025-07-27T20:44:20.550657"
+  },
+  {
+    "n_subjects": 10,
+    "n_train_samples": 2871,
+    "n_val_samples": 491,
+    "n_test_samples": 483,
+    "best_val_accuracy": 0.8879837067209776,
+    "best_val_precision": 0.9096956364640029,
+    "best_val_recall": 0.8878519322622666,
+    "best_test_accuracy": 0.7701863354037267,
+    "best_test_precision": 0.8363201402353599,
+    "best_test_recall": 0.7690187798523664,
+    "best_epoch": 6,
+    "optuna_trials": 30,
+    "best_hyperparams": {
+      "lr": 0.002740315769542381,
+      "weight_decay": 4.546732942534476e-07,
+      "train_batch_size": 32,
+      "val_batch_size": 32
+    },
+    "duration_minutes": 53.97372001806895,
+    "timestamp": "2025-07-27T21:38:18.982866"
+  }
+]
