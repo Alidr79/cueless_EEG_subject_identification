@@ -1,0 +1,146 @@
+[
+    {
+        "n_subjects": 2,
+        "n_train_samples": 556,
+        "n_val_samples": 98,
+        "n_test_samples": 96,
+        "test_accuracy": 0.9895833333333334,
+        "test_precision": 0.9897959183673469,
+        "test_recall": 0.9895833333333333,
+        "best_hyperparams": {
+            "C": 14.528246637516036,
+            "gamma": 0.0018794668241638478
+        },
+        "optuna_val_accuracy": 1.0,
+        "duration_minutes": 1.2182969768842062,
+        "timestamp": "2025-08-03T05:58:46.217740"
+    },
+    {
+        "n_subjects": 3,
+        "n_train_samples": 845,
+        "n_val_samples": 147,
+        "n_test_samples": 145,
+        "test_accuracy": 0.993103448275862,
+        "test_precision": 0.9933333333333333,
+        "test_recall": 0.9930555555555555,
+        "best_hyperparams": {
+            "C": 33.01647150911624,
+            "gamma": 0.00010593366501354342
+        },
+        "optuna_val_accuracy": 1.0,
+        "duration_minutes": 1.8488813757896423,
+        "timestamp": "2025-08-03T06:00:37.154874"
+    },
+    {
+        "n_subjects": 4,
+        "n_train_samples": 1128,
+        "n_val_samples": 197,
+        "n_test_samples": 193,
+        "test_accuracy": 0.9896373056994818,
+        "test_precision": 0.9901960784313726,
+        "test_recall": 0.9895833333333333,
+        "best_hyperparams": {
+            "C": 77.62120319752451,
+            "gamma": 0.00010863833419456819
+        },
+        "optuna_val_accuracy": 1.0,
+        "duration_minutes": 2.454645876089732,
+        "timestamp": "2025-08-03T06:03:04.438252"
+    },
+    {
+        "n_subjects": 5,
+        "n_train_samples": 1421,
+        "n_val_samples": 246,
+        "n_test_samples": 241,
+        "test_accuracy": 0.983402489626556,
+        "test_precision": 0.9843799058084773,
+        "test_recall": 0.9833333333333334,
+        "best_hyperparams": {
+            "C": 22.944456496106234,
+            "gamma": 0.0003554875147919965
+        },
+        "optuna_val_accuracy": 1.0,
+        "duration_minutes": 3.3779985070228578,
+        "timestamp": "2025-08-03T06:06:27.123226"
+    },
+    {
+        "n_subjects": 6,
+        "n_train_samples": 1705,
+        "n_val_samples": 293,
+        "n_test_samples": 289,
+        "test_accuracy": 0.9342560553633218,
+        "test_precision": 0.9494658119658119,
+        "test_recall": 0.9341695011337868,
+        "best_hyperparams": {
+            "C": 0.3874355558341778,
+            "gamma": 0.0007320615656517504
+        },
+        "optuna_val_accuracy": 0.9965870307167235,
+        "duration_minutes": 3.35247239669164,
+        "timestamp": "2025-08-03T06:09:48.276308"
+    },
+    {
+        "n_subjects": 7,
+        "n_train_samples": 1996,
+        "n_val_samples": 343,
+        "n_test_samples": 339,
+        "test_accuracy": 0.9793510324483776,
+        "test_precision": 0.9798226433430515,
+        "test_recall": 0.9795262390670553,
+        "best_hyperparams": {
+            "C": 33.01647150911624,
+            "gamma": 0.00010593366501354342
+        },
+        "optuna_val_accuracy": 1.0,
+        "duration_minutes": 2.8933056235313415,
+        "timestamp": "2025-08-03T06:12:41.877552"
+    },
+    {
+        "n_subjects": 8,
+        "n_train_samples": 2288,
+        "n_val_samples": 391,
+        "n_test_samples": 388,
+        "test_accuracy": 0.9484536082474226,
+        "test_precision": 0.9518031597449568,
+        "test_recall": 0.9491177721088435,
+        "best_hyperparams": {
+            "C": 4.4291733205227555,
+            "gamma": 0.00025284334687958044
+        },
+        "optuna_val_accuracy": 0.9948849104859335,
+        "duration_minutes": 4.470689372221629,
+        "timestamp": "2025-08-03T06:17:10.122596"
+    },
+    {
+        "n_subjects": 9,
+        "n_train_samples": 2580,
+        "n_val_samples": 441,
+        "n_test_samples": 435,
+        "test_accuracy": 0.9195402298850575,
+        "test_precision": 0.9268406773179689,
+        "test_recall": 0.92027375725704,
+        "best_hyperparams": {
+            "C": 10.833638781816703,
+            "gamma": 0.0007029534633135832
+        },
+        "optuna_val_accuracy": 0.9909297052154195,
+        "duration_minutes": 3.0388247847557066,
+        "timestamp": "2025-08-03T06:20:12.454800"
+    },
+    {
+        "n_subjects": 10,
+        "n_train_samples": 2871,
+        "n_val_samples": 491,
+        "n_test_samples": 483,
+        "test_accuracy": 0.9606625258799172,
+        "test_precision": 0.963211600222339,
+        "test_recall": 0.961122231871472,
+        "best_hyperparams": {
+            "C": 3.631095053672194,
+            "gamma": 0.00037077442375572553
+        },
+        "optuna_val_accuracy": 0.9938900203665988,
+        "duration_minutes": 3.9027672251065573,
+        "timestamp": "2025-08-03T06:24:06.623506"
+    }
+]

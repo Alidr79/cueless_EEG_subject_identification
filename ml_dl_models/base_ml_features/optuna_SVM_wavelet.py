@@ -11,12 +11,14 @@ from optuna.trial import Trial
 import os
 
 # Define paths
-TRAIN_DATASET_PATH = '../train_dataset.npy'
+# TRAIN_DATASET_PATH = '../train_dataset.npy'
+TRAIN_DATASET_PATH = '../dataset_ses-3.npy'
+
 VAL_DATASET_PATH = '../val_dataset.npy'
 TEST_DATASET_PATH = '../test_dataset.npy'
-MODEL_SAVE_PATH = 'SVM_on_wavelet_optuna.pkl'  # Updated model save path
-OPTUNA_STORAGE = "sqlite:///study_SVM_wavelet.db"  # Updated Optuna study storage
-log_to_file = 'test_results_SVM_wavelet_optuna.md'  # Updated log file
+MODEL_SAVE_PATH = 'SVM_on_wavelet_optuna_ses-3.pkl'  # Updated model save path
+OPTUNA_STORAGE = "sqlite:///study_SVM_wavelet_ses-3.db"  # Updated Optuna study storage
+log_to_file = 'test_results_SVM_wavelet_optuna_ses-3.md'  # Updated log file
 OPTUNA_N_TRIALS = 50
 
 # Load datasets
